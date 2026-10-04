@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.chefanane.mobile",
+      "sha256_cert_fingerprints": [
+        "61:07:71:8B:26:3B:96:5F:FF:6F:74:04:B7:DA:70:C0:2A:7B:A9:99:C1:2B:5A:71:B5:59:E5:38:81:C5:BD:B0"
+      ]
+    }
+  }
+]

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self'; base-uri 'none'; form-action 'none'">
+<title>Chefanane — Aile daveti</title>
+<style>
+  :root {
+    --bg: #F1E8D8; --surface: #F8F2E7; --border: #D9CBB4;
+    --text: #2B2118; --muted: #706150; --primary: #7D2A2F; --on-primary: #FFFFFF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000; --surface: #1A1A1A; --border: #333333;
+      --text: #F1E8D8; --muted: #B3A48F; --primary: #9A3A40; --on-primary: #FFFFFF;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; align-items: center; justify-content: center; padding: 24px 16px;
+  }
+  main {
+    width: 100%; max-width: 420px; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 20px; padding: 28px 24px; text-align: center;
+  }
+  h1 { font-size: 1.4rem; margin: 0 0 8px; }
+  p { color: var(--muted); line-height: 1.5; margin: 8px 0; }
+  .code {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 1.6rem;
+    letter-spacing: 0.15em; color: var(--text); margin: 20px 0 8px; word-break: break-all;
+  }
+  .button {
+    display: block; margin: 20px 0 8px; padding: 14px 16px; min-height: 48px; border-radius: 12px;
+    background: var(--primary); color: var(--on-primary); text-decoration: none; font-weight: 600;
+  }
+  .soon { font-size: 0.9rem; }
+  [hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Chefanane'de bir aileye davet edildin</h1>
+
+  <section id="valid" hidden>
+    <p>Davet kodun:</p>
+    <div class="code" id="code" aria-label="Davet kodu"></div>
+    <a class="button" id="open" href="chefanane://katil">Uygulamada aç</a>
+    <p>Uygulama açılmazsa Chefanane'de <strong>Hesap → Ailem → Kodla katıl</strong> adımlarıyla bu kodu gir. Davet 24 saat geçerlidir.</p>
+  </section>
+
+  <section id="invalid" hidden>
+    <p>Bu bağlantıda geçerli bir davet kodu bulunamadı. Daveti gönderen kişiden yeni bir bağlantı isteyebilirsin.</p>
+  </section>
+
+  <p class="soon">Uygulamayı indir — yakında</p>
+</main>
+<script>
+  // Kod adresin "#" sonrasındadır: sunucuya hiç gönderilmez. Burada yalnızca
+  // biçimi denetlenip gösterilir; hiçbir yere gönderilmez ve saklanmaz.
+  (function () {
+    var raw = (location.hash || "").slice(1);
+    var code = raw.toUpperCase().replace(/[^A-Z0-9]/g, "");
+    if (/^[ABCDEFGHJKMNPQRSTVWXYZ2-9]{10}$/.test(code)) {
+      document.getElementById("code").textContent = code;
+      document.getElementById("open").href = "chefanane://katil#" + code;
+      document.getElementById("valid").hidden = false;
+    } else {
+      document.getElementById("invalid").hidden = false;
+    }
+  })();
+</script>
+</body>
+</html>
