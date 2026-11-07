@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["QD5XR3K479.com.chefanane.mobile.staging"],
+        "components": [{ "/": "/katil*", "comment": "Aile daveti" }]
+      }
+    ]
+  }
+}
